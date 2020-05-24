@@ -1,5 +1,5 @@
 """
-Function:
+Function: This script is used to generate table-like data
 Author: Du Fei
 Create Time: 2020/5/16 22:00
 """
@@ -16,6 +16,25 @@ def generate_data(num_of_files, num_of_fields, number_of_lines_each_file, save_d
                   id_type="str",
                   shuffle_id=True,
                   id_list=None):
+    """
+    This method is used to generate data and save it to disk. Field value is a mixed string formatted as
+    "field_{file_index}_{field_integer_value}". Here {file_index} is the index of files and field_integer_value is a
+    random integer between 0 and 100
+    :param num_of_files: number of files that will be generated
+    :param num_of_fields: number of fields for each line
+    :param number_of_lines_each_file: number of lines for each file
+    :param save_dir: where to save
+    :param add_head: whether to add header for each file, it can be used as the column name
+    :param add_id: whether to add id for each line, if True then number of fields will be num_of_fields+1
+    :param id_type: id type, either be integer or string, string id will be formatted as "id_{rowNo}"
+    :param shuffle_id: generally id will be the row number and sorted. If shuffle_id is True, then we will shuffle
+                       the id order
+    :param id_list: You can also specific id list for generated data. It will be used to generated an associated data
+                    for current one. It means that you can generate one data without id_list and put the id of the
+                    data as the new data id_list. Then the new data can be joined with the old one.
+    """
+
+    # if id_list is None, then generate row number for all data and regard the row number as the id
     if id_list is None:
         total_lines = num_of_files * number_of_lines_each_file
         id_list = list(range(total_lines))
