@@ -21,8 +21,10 @@ if __name__ == '__main__':
     cluster = LocalCluster(n_workers=4, threads_per_worker=1)
     client = Client(cluster)
 
-    df1 = dd.read_csv(input_1 + "/data_*.csv")
-    df2 = dd.read_csv(input_2 + "/data_*.csv")
+    t_0 = datetime.now()
+    df1 = dd.read_csv(input_1 + "/data_*.csv").set_index("id")
+    df2 = dd.read_csv(input_2 + "/data_*.csv").set_index("id")
+    print(f"elapsed time for reading:{(datetime.now() - t_0).seconds}")
 
     print(df1.divisions)
 

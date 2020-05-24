@@ -10,3 +10,7 @@ We know that python has `GIL` that will limit multi threads for all native pytho
 #### Dask Example and Test
 
 `Dask` is a very famous python lib which is used to run program by distributed way. It can be regarded as a light distributed computing framework just like spark. In `dask` package, we will show how to use dask, and compare the effectiveness of the `Dask` with native python codes.
+
+关于Dask进行merge操作的测试，这里有一个中文的博客使用这个项目的代码进行测试：
+
+https://www.datalearner.com/blog/1051590316250620

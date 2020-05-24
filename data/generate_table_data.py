@@ -99,15 +99,18 @@ if __name__ == '__main__':
     if not os.path.exists(input_2):
         os.makedirs(input_2)
 
-    file_number = 50
+    _shuffle_id = True
+    _id_type = "str"
+
+    file_number = 10
     field_number = 10
     line_number = 1000000
 
-    generate_data(file_number, field_number, line_number, input_1, id_type="str")
+    generate_data(file_number, field_number, line_number, input_1, id_type=_id_type, shuffle_id=_shuffle_id)
 
     file_number_2 = 2
     field_number_2 = 5
     line_number_2 = 1000000
 
     sample_ids = np.random.randint(0, file_number * line_number, file_number_2 * line_number_2)
-    generate_data(file_number_2, field_number_2, line_number_2, input_2, id_list=sample_ids, id_type="str")
+    generate_data(file_number_2, field_number_2, line_number_2, input_2, id_list=sample_ids, id_type=_id_type, shuffle_id=_shuffle_id)
