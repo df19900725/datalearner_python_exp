@@ -18,8 +18,9 @@ def generate_data(num_of_files, num_of_fields, number_of_lines_each_file, save_d
                   id_list=None):
     """
     This method is used to generate data and save it to disk. Field value is a mixed string formatted as
-    "field_{file_index}_{field_integer_value}". Here {file_index} is the index of files and field_integer_value is a
+    "field_{file_index}_{field_integer_value}". Here {file_index} is the index of files and {field_integer_value} is a
     random integer between 0 and 100
+
     :param num_of_files: number of files that will be generated
     :param num_of_fields: number of fields for each line
     :param number_of_lines_each_file: number of lines for each file
