@@ -10,7 +10,11 @@ import shutil
 import numpy as np
 
 
-def generate_data(num_of_files, num_of_fields, number_of_lines_each_file, save_dir,
+def generate_data(num_of_files,
+                  num_of_fields,
+                  number_of_lines_each_file,
+                  save_dir,
+                  field_value_type="str",
                   add_head=True,
                   add_id=True,
                   id_type="str",
@@ -25,6 +29,7 @@ def generate_data(num_of_files, num_of_fields, number_of_lines_each_file, save_d
     :param num_of_fields: number of fields for each line
     :param number_of_lines_each_file: number of lines for each file
     :param save_dir: where to save
+    :param field_value_type: field value type, string or integer, default is string
     :param add_head: whether to add header for each file, it can be used as the column name
     :param add_id: whether to add id for each line, if True then number of fields will be num_of_fields+1
     :param id_type: id type, either be integer or string, string id will be formatted as "id_{rowNo}"
@@ -67,8 +72,12 @@ def generate_data(num_of_files, num_of_fields, number_of_lines_each_file, save_d
                 res_list.append(f"{','.join('field_' + str(field_index) for field_index in range(num_of_fields))}")
 
         for line_index in range(number_of_lines_each_file):
-            line_str = ",".join(f"field_{file_index}_{str(field_value).zfill(3)}" for field_index, field_value in
-                                enumerate(field_value_number[line_index]))
+            if field_value_type == "str":
+                line_str = ",".join(f"field_{file_index}_{str(field_value).zfill(3)}" for field_index, field_value in
+                                    enumerate(field_value_number[line_index]))
+            else:
+                line_str = ",".join(str(field_value) for field_index, field_value in
+                                    enumerate(field_value_number[line_index]))
 
             if add_id:
                 id_index = file_index * number_of_lines_each_file + line_index
@@ -113,4 +122,5 @@ if __name__ == '__main__':
     line_number_2 = 1000000
 
     sample_ids = np.random.randint(0, file_number * line_number, file_number_2 * line_number_2)
-    generate_data(file_number_2, field_number_2, line_number_2, input_2, id_list=sample_ids, id_type=_id_type, shuffle_id=_shuffle_id)
+    generate_data(file_number_2, field_number_2, line_number_2, input_2, id_list=sample_ids, id_type=_id_type,
+                  shuffle_id=_shuffle_id)
